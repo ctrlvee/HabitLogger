@@ -235,7 +235,7 @@ namespace habitLogger
             if (numberInput == "0") GetUserInput();
 
             while (!Int32.TryParse(numberInput, out _) || Convert.ToInt32(numberInput) < 0) {
-                Console.WriteLine("\n\nInvalid nudmber. Try again \n\n");
+                Console.WriteLine("\n\nInvalid number. Try again \n\n");
                 numberInput = Console.ReadLine();
             }
 
@@ -252,8 +252,6 @@ public class GymTimes
 {
     public int Id { get; set; }
     public DateTime Date { get; set; }
-
-
     public int Quantity { get; set; }
 }
 
