@@ -54,6 +54,7 @@ namespace habitLogger
                     case "0":
                         Console.WriteLine("\nGoodbye!\n");
                         closeApp = true;
+                        Environment.Exit(0);
                         break;
                     case "1":
                         GetAllRecords();
@@ -232,6 +233,11 @@ namespace habitLogger
             string numberInput = Console.ReadLine();
 
             if (numberInput == "0") GetUserInput();
+
+            while (!Int32.TryParse(numberInput, out _) || Convert.ToInt32(numberInput) < 0) {
+                Console.WriteLine("\n\nInvalid nudmber. Try again \n\n");
+                numberInput = Console.ReadLine();
+            }
 
             int finalInput = Convert.ToInt32(numberInput);
 
