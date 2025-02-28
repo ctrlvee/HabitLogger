@@ -255,11 +255,61 @@ namespace habitLogger
             return quantity;
         }
 
-        internal static DateTime GenerateRandomDate() {
-            Random gen = new Random();
-            DateTime start = new DateTime(2024,1,1);
-            int range = (DateTime.Today - start).Days;
-            return start.AddDays(gen.Next(range));
+        // internal static DateTime GenerateRandomDate() {
+        //     Random gen = new Random();
+        //     DateTime start = new DateTime(2024,1,1);
+        //     int range = (DateTime.Today - start).Days;
+        //     DateTime d = start.AddDays(gen.Next(range));
+        //     string result = DateTime.TryParseExact(d, "dd-MM-yy", new CultureInfo("en-US"), DateTimeStyles.None, out _);
+        //     return d;
+        // }
+
+        internal static void CreateRandomRecords() {
+            
+            using (var connection = new SqliteConnection(connectionString)) {
+                connection.Open();
+                var tableCmd = connection.CreateCommand();
+
+                int num_to_make = 100;
+                string date = "";
+                int quantity = 0;
+                for (int i =0; i < num_to_make; i++) {
+                    
+                }
+                tableCmd.CommandText = $"INSERT INTO visiting_gym(date, quantity) VALUES('{date}', {quantity})";
+
+
+            }
+
+            
+            // string dateInput = Console.ReadLine();
+
+            // if (dateInput == "0") GetUserInput();
+
+            // while (!DateTime.TryParseExact(dateInput, "dd-MM-yy", new CultureInfo("en-US"), DateTimeStyles.None, out _)) {
+            //     Console.WriteLine("\n\nPlease insert the date: (Format: dd-mm-yy). Type 0 to return to main menu");
+            //     dateInput = Console.ReadLine();
+            // }
+
+            // return dateInput;
+
+        //      string date = GetDateInput();
+
+        //     int quantity = GetNumberInput("\n\n Please insert number of times visited gym\n\n");
+
+        //     using (var connection = new SqliteConnection(connectionString))
+        //     {
+        //         connection.Open();
+        //         var tableCmd = connection.CreateCommand();
+
+        //         tableCmd.CommandText =
+        //             $"INSERT INTO visiting_gym(date, quantity) VALUES('{date}', {quantity})";
+
+
+        //         tableCmd.ExecuteNonQuery();
+        //         connection.Close();
+        //     }
+        // }
         }
     }
 }
