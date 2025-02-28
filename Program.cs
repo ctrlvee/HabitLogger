@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 using Microsoft.Data.Sqlite;
 using Microsoft.VisualBasic.FileIO;
@@ -55,7 +56,7 @@ namespace habitLogger
                         closeApp = true;
                         break;
                     case "1":
-                        // GetAllRecords();
+                        GetAllRecords();
                         break;
                     case "2":
                         Insert();
@@ -87,6 +88,42 @@ namespace habitLogger
 
                 tableCmd.ExecuteNonQuery();
                 connection.Close();
+            }
+        }
+
+        private static void GetAllRecords() {
+            Console.Clear();
+            using (var connection = new SqliteConnection(connectionString)) {
+                connection.Open();
+                var tableCmd = connection.CreateCommand();
+                tableCmd.CommandText = 
+                $"SELECT * FROM visiting_gym";
+
+                List<GymTimes> tableData = new();
+
+                SqliteDataReader reader = tableCmd.ExecuteReader();
+
+                if (reader.HasRows) {
+                    while (reader.Read()) {
+                        tableData.Add(
+                            new GymTimes {
+                                Id = reader.GetInt32(0),
+                                Date =DateTime.ParseExact(reader.GetString(1), "dd-MM-yy", new CultureInfo("en-US")),
+                                Quantity = reader.GetInt32(2)
+
+                            }
+                        );
+                    }
+                } else {
+                    Console.WriteLine("No rows found");
+                }
+
+                connection.Close();
+                Console.WriteLine("--------------------------\n");
+                foreach (var gt in tableData) {
+                    Console.WriteLine($"{gt.Id} - {gt.Date.ToString("dd-MMM-yyyy")} - {gt.Quantity} times");
+                }
+                Console.WriteLine("-------------------------------\n")
             }
         }
 
