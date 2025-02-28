@@ -244,7 +244,23 @@ namespace habitLogger
             return finalInput;
         }
 
+        // Generate data into the database automatically upon initial creation
+        // Create a few habits (start with just the one)
+        // Insert a hundred records with random values
+        // Create random dates and quantity
 
+        internal static int GenerateRandomQuantity() {
+            Random random = new Random();
+            int quantity = random.Next(1,10);
+            return quantity;
+        }
+
+        internal static DateTime GenerateRandomDate() {
+            Random gen = new Random();
+            DateTime start = new DateTime(2024,1,1);
+            int range = (DateTime.Today - start).Days;
+            return start.AddDays(gen.Next(range));
+        }
     }
 }
 
