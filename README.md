@@ -30,4 +30,14 @@ CRUD DB functions
 From the main menu users can Create, Read, Update or Delete entries for whichever date they want, entered in mm-DD-yyyy format. Duplicate days will not be inputted.
 Time and Dates inputted are checked to make sure they are in the correct and realistic format.
 
+Learning
+-----------
+1. ADO.NET uses parameterized queries to execute SQL commands
+   > This is a first line of defense against SQL injection attacks
+   > User input is treated as value instead of a part of the SQL command
+   > Prevent malicious users from injecting rogue SQL code to my query
+2. DRY - Don't Repeat Yourself
+   > Having a separate method to solve a specific task for simplification and repeatability.
+3. Validation
+   > Make sure user input fits the guidelines of what we want and prevent the program from crashing 
 
