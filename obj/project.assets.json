@@ -332,31 +332,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\virtfer\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/Users/v/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\virtfer\\Documents\\Coding\\HabitLogger\\HabitLogger\\HabitLogger.csproj",
+      "projectUniqueName": "/Users/v/Documents/Coding/Practice/HabitLogger/HabitLogger.csproj",
       "projectName": "HabitLogger",
-      "projectPath": "C:\\Users\\virtfer\\Documents\\Coding\\HabitLogger\\HabitLogger\\HabitLogger.csproj",
-      "packagesPath": "C:\\Users\\virtfer\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\virtfer\\Documents\\Coding\\HabitLogger\\HabitLogger\\obj\\",
+      "projectPath": "/Users/v/Documents/Coding/Practice/HabitLogger/HabitLogger.csproj",
+      "packagesPath": "/Users/v/.nuget/packages/",
+      "outputPath": "/Users/v/Documents/Coding/Practice/HabitLogger/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\virtfer\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/v/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -402,7 +395,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.103/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
