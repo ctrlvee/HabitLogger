@@ -61,8 +61,9 @@ namespace habitLogger
                     case "2":
                         Insert();
                         break;
-                        // case "3":
-                        //     DeleteDi
+                    case "3":
+                        Delete();
+                        break;
                 }
 
 
@@ -70,7 +71,23 @@ namespace habitLogger
         }
 
 
-        
+        private static void Delete() {
+
+            string date = GetDateInput();
+
+            using (var connection = new SqliteConnection(connectionString)) {
+                connection.Open();
+                var tableCmd = connection.CreateCommand();
+
+                tableCmd.CommandText = 
+                    $"DELETE FROM visiting_gym WHERE date = '{date}'";
+
+                    tableCmd.ExecuteNonQuery();
+                    connection.Close();
+            }
+
+
+        }
         private static void Insert()
         {
             string date = GetDateInput();
@@ -123,7 +140,7 @@ namespace habitLogger
                 foreach (var gt in tableData) {
                     Console.WriteLine($"{gt.Id} - {gt.Date.ToString("dd-MMM-yyyy")} - {gt.Quantity} times");
                 }
-                Console.WriteLine("-------------------------------\n")
+                Console.WriteLine("-------------------------------\n");
             }
         }
 
