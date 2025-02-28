@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Microsoft.Data.Sqlite;
 using Microsoft.VisualBasic.FileIO;
 
@@ -53,9 +54,9 @@ namespace habitLogger
                         Console.WriteLine("\nGoodbye!\n");
                         closeApp = true;
                         break;
-                    // case "1":
-                    //     GetAllRecords();
-                    //     break;
+                    case "1":
+                        // GetAllRecords();
+                        break;
                     case "2":
                         Insert();
                         break;
@@ -67,6 +68,8 @@ namespace habitLogger
             }
         }
 
+
+        
         private static void Insert()
         {
             string date = GetDateInput();
@@ -111,5 +114,17 @@ namespace habitLogger
 
             return finalInput;
         }
+
+
     }
 }
+
+public class GymTimes
+{
+    public int Id { get; set; }
+    public DateTime Date { get; set; }
+
+
+    public int Quantity { get; set; }
+}
+
