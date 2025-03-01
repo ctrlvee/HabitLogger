@@ -255,14 +255,17 @@ namespace habitLogger
             return quantity;
         }
 
-        // internal static DateTime GenerateRandomDate() {
-        //     Random gen = new Random();
-        //     DateTime start = new DateTime(2024,1,1);
-        //     int range = (DateTime.Today - start).Days;
-        //     DateTime d = start.AddDays(gen.Next(range));
-        //     string result = DateTime.TryParseExact(d, "dd-MM-yy", new CultureInfo("en-US"), DateTimeStyles.None, out _);
-        //     return d;
-        // }
+        internal static string GenerateRandomDate() {
+            Random gen = new Random();
+            DateTime start = new DateTime(2024,1,1);
+            int range = (DateTime.Today - start).Days;
+            DateTime d = start.AddDays(gen.Next(range));
+
+            // convert to dd-MM-yy format 
+            string s = d.ToString("dd-MM-yy");
+            Console.WriteLine($"Value here {s}");
+            return s;
+        }
 
         internal static void CreateRandomRecords() {
             
