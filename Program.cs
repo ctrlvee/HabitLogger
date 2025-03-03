@@ -14,6 +14,7 @@ namespace habitLogger
         static void Main(string[] args)
         {
             CreateRandomRecords();
+            GenerateReport();
 
             using (var connection = new SqliteConnection(connectionString))
             {
@@ -75,13 +76,15 @@ namespace habitLogger
             }
         }
 
-        internal static void Update() {
+        internal static void Update()
+        {
             Console.Clear();
             GetAllRecords();
 
             var recordId = GetNumberInput("\n\nPlease type Id of the record you want to update.");
 
-            using (var connection = new SqliteConnection(connectionString)) {
+            using (var connection = new SqliteConnection(connectionString))
+            {
 
                 connection.Open();
 
@@ -89,7 +92,8 @@ namespace habitLogger
                 checkCmd.CommandText = $"SELECT EXISTS(SELECT 1 FROM visiting_gym WHERE Id = {recordId})";
                 int checkQuery = Convert.ToInt32(checkCmd.ExecuteScalar());
 
-                if (checkQuery == 0) {
+                if (checkQuery == 0)
+                {
                     Console.WriteLine($"\n\nRecord with Id {recordId} doesn't exist\n\n");
                     connection.Close();
                     Update();
@@ -110,7 +114,7 @@ namespace habitLogger
 
             Console.WriteLine("Updated");
 
-        
+
 
         }
 
@@ -211,13 +215,14 @@ namespace habitLogger
 
         internal static string GetDateInput()
         {
-           
+
 
             string dateInput = Console.ReadLine();
 
             if (dateInput == "0") GetUserInput();
 
-            while (!DateTime.TryParseExact(dateInput, "dd-MM-yy", new CultureInfo("en-US"), DateTimeStyles.None, out _)) {
+            while (!DateTime.TryParseExact(dateInput, "dd-MM-yy", new CultureInfo("en-US"), DateTimeStyles.None, out _))
+            {
                 Console.WriteLine("\n\nPlease insert the date: (Format: dd-mm-yy). Type 0 to return to main menu");
                 dateInput = Console.ReadLine();
             }
@@ -235,7 +240,8 @@ namespace habitLogger
 
             if (numberInput == "0") GetUserInput();
 
-            while (!Int32.TryParse(numberInput, out _) || Convert.ToInt32(numberInput) < 0) {
+            while (!Int32.TryParse(numberInput, out _) || Convert.ToInt32(numberInput) < 0)
+            {
                 Console.WriteLine("\n\nInvalid number. Try again \n\n");
                 numberInput = Console.ReadLine();
             }
@@ -250,27 +256,30 @@ namespace habitLogger
         // Insert a hundred records with random values
         // Create random dates and quantity
 
-        internal static int GenerateRandomQuantity() {
+        internal static int GenerateRandomQuantity()
+        {
             Random random = new Random();
-            int quantity = random.Next(1,10);
+            int quantity = random.Next(1, 10);
             return quantity;
         }
 
-        internal static string GenerateRandomDate() {
+        internal static string GenerateRandomDate()
+        {
             Random gen = new Random();
-            DateTime start = new DateTime(2024,1,1);
+            DateTime start = new DateTime(2001, 1, 1);
             int range = (DateTime.Today - start).Days;
             DateTime d = start.AddDays(gen.Next(range));
 
             // convert to dd-MM-yy format 
             string s = d.ToString("dd-MM-yy");
-            Console.WriteLine($"Value here {s}");
             return s;
         }
 
-        internal static void CreateRandomRecords() {
-            
-            using (var connection = new SqliteConnection(connectionString)) {
+        internal static void CreateRandomRecords()
+        {
+
+            using (var connection = new SqliteConnection(connectionString))
+            {
 
                 connection.Open();
                 var tableCmd = connection.CreateCommand();
@@ -278,15 +287,50 @@ namespace habitLogger
                 int num_to_make = 100;
                 string date = "";
                 int quantity = 0;
-                
-                for (int i =0; i < num_to_make; i++) {
+
+                for (int i = 0; i < num_to_make; i++)
+                {
                     quantity = GenerateRandomQuantity();
                     date = GenerateRandomDate();
                     tableCmd.CommandText = $"INSERT INTO visiting_gym(date, quantity) VALUES('{date}', {quantity})";
 
-                    tableCmd.ExecuteNonQuery();
+
                 }
                 connection.Close();
+            }
+        }
+
+        // generate a report
+        // use DataReader
+
+        internal static void GenerateReport()
+        {
+
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var tableCmd = connection.CreateCommand();
+
+                tableCmd.CommandText =
+                $"SELECT  from visiting_gym";
+
+                // tableCmd.ExecuteNonQuery();
+
+                SqliteDataReader reader = tableCmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Console.WriteLine("{0}\t{1}", reader.GetInt32(0), reader.GetString(1));
+                    }
+                }
+
+                else
+                {
+                    Console.WriteLine("No rows found.");
+                }
+                reader.Close();
             }
         }
     }
