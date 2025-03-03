@@ -13,8 +13,7 @@ namespace habitLogger
 
         static void Main(string[] args)
         {
-            CreateRandomRecords();
-            GenerateReport();
+            
 
             using (var connection = new SqliteConnection(connectionString))
             {
@@ -24,13 +23,14 @@ namespace habitLogger
                 tableCmd.CommandText =
                     @"CREATE TABLE IF NOT EXISTS visiting_gym (
                         Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        Date TEXT,
+                        Date DATETIME,
                         Quantity INTEGER
                     )";
                 tableCmd.ExecuteNonQuery();
                 connection.Close();
             }
-
+            CreateRandomRecords();
+            GenerateReport();
             GetUserInput();
 
         }
@@ -191,7 +191,8 @@ namespace habitLogger
                             new GymTimes
                             {
                                 Id = reader.GetInt32(0),
-                                Date = DateTime.ParseExact(reader.GetString(1), "dd-MM-yy", new CultureInfo("en-US")),
+                                // Date = DateTime.ParseExact(reader.GetString(1), "dd-MM-yy", new CultureInfo("en-US")),
+                                Date = reader.GetDateTime(1),
                                 Quantity = reader.GetInt32(2)
 
                             }
@@ -207,7 +208,8 @@ namespace habitLogger
                 Console.WriteLine("--------------------------\n");
                 foreach (var gt in tableData)
                 {
-                    Console.WriteLine($"{gt.Id} - {gt.Date.ToString("dd-MMM-yyyy")} - {gt.Quantity} times");
+                    // Console.WriteLine($"{gt.Id} - {gt.Date.ToString("dd-MMM-yyyy")} - {gt.Quantity} times");
+                    Console.WriteLine($"{gt.Id} - {gt.Date} - {gt.Quantity} times");
                 }
                 Console.WriteLine("-------------------------------\n");
             }
@@ -251,11 +253,6 @@ namespace habitLogger
             return finalInput;
         }
 
-        // Generate data into the database automatically upon initial creation
-        // Create a few habits (start with just the one)
-        // Insert a hundred records with random values
-        // Create random dates and quantity
-
         internal static int GenerateRandomQuantity()
         {
             Random random = new Random();
@@ -292,9 +289,9 @@ namespace habitLogger
                 {
                     quantity = GenerateRandomQuantity();
                     date = GenerateRandomDate();
-                    tableCmd.CommandText = $"INSERT INTO visiting_gym(date, quantity) VALUES('{date}', {quantity})";
-
-
+                    DateTime dateTime = DateTime.ParseExact(date, "dd-MM-yy", CultureInfo.InvariantCulture);
+                    tableCmd.CommandText = $"INSERT INTO visiting_gym(date, quantity) VALUES('{dateTime}', {quantity})";
+                    tableCmd.ExecuteNonQuery();
                 }
                 connection.Close();
             }
@@ -322,13 +319,14 @@ namespace habitLogger
                 {
                     while (reader.Read())
                     {
-                        // Next step is convert string date to DateTime date then aggregate by week
+                        // Next step is convert string date to DateTime date 
+                        // then aggregate by week
                         // Then in our report, we do the sum for each week 
                         // need a counter for week 1,2,3,4....n
                         string s = reader.GetString(0);
-                        // DateTime dateTime = DateTime.Parse(s);
-                        DateTime dateTime = DateTime.ParseExact(s, "dd-MM-yy",  CultureInfo.InvariantCulture);
-                        Console.WriteLine($"date - {dateTime}");
+
+                        // DateTime dateTime = DateTime.ParseExact(s, "dd-MM-yy",  null);
+                        // Console.WriteLine($"date - {dateTime}");
 
                     }
                 }
