@@ -309,7 +309,8 @@ namespace habitLogger
                 var tableCmd = connection.CreateCommand();
 
                 tableCmd.CommandText =
-                $"SELECT date from visiting_gym";
+                // $"SELECT date from visiting_gym";
+                "SELECT strftime('%Y', date) from visiting_gym";
 
                 // tableCmd.ExecuteNonQuery();
 
@@ -323,10 +324,10 @@ namespace habitLogger
                         // then aggregate by week
                         // Then in our report, we do the sum for each week 
                         // need a counter for week 1,2,3,4....n
-                        string s = reader.GetString(0);
+                        var s = reader.GetDateTime(0);
 
                         // DateTime dateTime = DateTime.ParseExact(s, "dd-MM-yy",  null);
-                        // Console.WriteLine($"date - {dateTime}");
+                        Console.WriteLine($"The report is for - {s}");
 
                     }
                 }
