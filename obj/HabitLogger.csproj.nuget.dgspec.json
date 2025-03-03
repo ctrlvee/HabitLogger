@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/Users/v/Documents/Coding/Practice/HabitLogger/HabitLogger.csproj": {}
+    "C:\\Users\\virtfer\\Documents\\Coding\\HabitLogger\\HabitLogger\\HabitLogger.csproj": {}
   },
   "projects": {
-    "/Users/v/Documents/Coding/Practice/HabitLogger/HabitLogger.csproj": {
+    "C:\\Users\\virtfer\\Documents\\Coding\\HabitLogger\\HabitLogger\\HabitLogger.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/v/Documents/Coding/Practice/HabitLogger/HabitLogger.csproj",
+        "projectUniqueName": "C:\\Users\\virtfer\\Documents\\Coding\\HabitLogger\\HabitLogger\\HabitLogger.csproj",
         "projectName": "HabitLogger",
-        "projectPath": "/Users/v/Documents/Coding/Practice/HabitLogger/HabitLogger.csproj",
-        "packagesPath": "/Users/v/.nuget/packages/",
-        "outputPath": "/Users/v/Documents/Coding/Practice/HabitLogger/obj/",
+        "projectPath": "C:\\Users\\virtfer\\Documents\\Coding\\HabitLogger\\HabitLogger\\HabitLogger.csproj",
+        "packagesPath": "C:\\Users\\virtfer\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\virtfer\\Documents\\Coding\\HabitLogger\\HabitLogger\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/v/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\virtfer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -65,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.103/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

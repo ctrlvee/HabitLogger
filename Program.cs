@@ -312,7 +312,7 @@ namespace habitLogger
                 var tableCmd = connection.CreateCommand();
 
                 tableCmd.CommandText =
-                $"SELECT  from visiting_gym";
+                $"SELECT date from visiting_gym";
 
                 // tableCmd.ExecuteNonQuery();
 
@@ -322,7 +322,8 @@ namespace habitLogger
                 {
                     while (reader.Read())
                     {
-                        Console.WriteLine("{0}\t{1}", reader.GetInt32(0), reader.GetString(1));
+                        // Console.WriteLine("{0}\t{1}", reader.GetInt32(0), reader.GetString(1));
+                        Console.WriteLine($"date - {reader.GetString(0)}");
                     }
                 }
 
