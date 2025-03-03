@@ -322,8 +322,14 @@ namespace habitLogger
                 {
                     while (reader.Read())
                     {
-                        // Console.WriteLine("{0}\t{1}", reader.GetInt32(0), reader.GetString(1));
-                        Console.WriteLine($"date - {reader.GetString(0)}");
+                        // Next step is convert string date to DateTime date then aggregate by week
+                        // Then in our report, we do the sum for each week 
+                        // need a counter for week 1,2,3,4....n
+                        string s = reader.GetString(0);
+                        // DateTime dateTime = DateTime.Parse(s);
+                        DateTime dateTime = DateTime.ParseExact(s, "dd-MM-yy",  CultureInfo.InvariantCulture);
+                        Console.WriteLine($"date - {dateTime}");
+
                     }
                 }
 
